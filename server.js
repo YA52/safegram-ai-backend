@@ -10,6 +10,8 @@ app.post("/analyze", (req, res) => {
 
     const comment = req.body.comment.toLowerCase();
 
+    let score = 100;
+
     const badWords = [
         "fake",
         "fraud",
@@ -18,29 +20,22 @@ app.post("/analyze", (req, res) => {
         "stupid",
         "hate",
         "waste",
-        "vedhava",
-        "chetta"
+        "chetta",
+        "vedhava"
     ];
 
-    let score = 100;
-
     badWords.forEach(word => {
-        if (comment.includes(word)) {
+        if(comment.includes(word)){
             score -= 20;
         }
     });
 
-    if (score < 0) score = 0;
+    if(score < 0) score = 0;
 
-    let status;
+    let status = "SAFE";
 
-    if (score >= 80) {
-        status = "SAFE";
-    } else if (score >= 50) {
-        status = "WARNING";
-    } else {
-        status = "DANGEROUS";
-    }
+    if(score < 80) status = "WARNING";
+    if(score < 50) status = "DANGEROUS";
 
     res.json({
         score,
@@ -50,5 +45,5 @@ app.post("/analyze", (req, res) => {
 });
 
 app.listen(5000, () => {
-    console.log("SafeGram AI Backend Running on Port 5000");
+    console.log("SafeGram AI Backend Running");
 });
