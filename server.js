@@ -13,17 +13,22 @@ app.post("/analyze", (req, res) => {
     let score = 100;
 
     const badWords = [
-        "fake",
-        "fraud",
-        "scam",
-        "idiot",
-        "stupid",
-        "hate",
-        "waste",
-        "chetta",
-        "vedhava",
-        "loser",
-        "useless"
+        const badWords = [
+  // English
+  "fake","fraud","scam","idiot","stupid","hate",
+  "loser","useless","ugly","cheater","garbage",
+  "worst","fool","nonsense","abuse","bully",
+
+  // Telugu (English typing)
+  "waste",
+  "panikimalina",
+  "chetta",
+  "vedhava",
+  "mosagadu",
+  "daridram",
+  "nikrusta",
+  "pichi"
+];
     ];
 
     badWords.forEach(word => {
@@ -40,6 +45,16 @@ if (score <= 80) status = "WARNING";
 if (score <= 40) status = "DANGEROUS";
     res.json({
         score,
+let message = "";
+
+if (status === "SAFE")
+    message = "Comment Safe ✅";
+
+if (status === "WARNING")
+    message = "Warning ⚠️ - Comment harmful ga undachu";
+
+if (status === "DANGEROUS")
+    message = "Dangerous ❌ - Comment block cheyyali";
         status
     });
 
