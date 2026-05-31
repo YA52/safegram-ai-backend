@@ -21,7 +21,9 @@ app.post("/analyze", (req, res) => {
         "hate",
         "waste",
         "chetta",
-        "vedhava"
+        "vedhava",
+        "loser",
+        "useless"
     ];
 
     badWords.forEach(word => {
@@ -42,6 +44,10 @@ app.post("/analyze", (req, res) => {
         status
     });
 
+});
+
+app.get("/", (req, res) => {
+    res.send("SafeGram AI Backend Running");
 });
 
 app.listen(5000, () => {
