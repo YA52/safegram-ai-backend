@@ -36,9 +36,8 @@ app.post("/analyze", (req, res) => {
 
     let status = "SAFE";
 
-    if(score < 80) status = "WARNING";
-    if(score < 50) status = "DANGEROUS";
-
+if (score <= 80) status = "WARNING";
+if (score <= 40) status = "DANGEROUS";
     res.json({
         score,
         status
